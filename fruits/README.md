@@ -1,27 +1,61 @@
-# Tensorflow Elliptical vs Sprial Galaxy Image Classifier
+TEAM:DOPPELGANGERS(G.VIGNESH & P.SREERAM)
 
-This is the repository developed for 'Image Classifier in TensorFlow in 5 Min on [YouTube](https://youtu.be/QfNvhPx5Px8) using this [CodeLab](https://codelabs.developers.google.com/codelabs/tensorflow-for-poets/?utm_campaign=chrome_series_machinelearning_063016&utm_source=gdev&utm_medium=yt-desc#0) by Google as a guide. 
+THEME: FOOD PROCESSING
 
-Scientists can use this classifier to automatically label whether an image taken by telescope is of a Spiral Galaxy or an Elliptical one.
+PRODUCT BUILT:Food Quality Estimator
 
-![el](galaxy_photos/elliptical/pic_023.jpg)
-![el](galaxy_photos/spiral/pic_004.jpg)
+The biggest problem that we are facing now is that,we are still not capable of identifying the level of damage in food products.Eventhough they do some quality checking at the beginning,the consumer is still getting some damaged food products.So we made a Machine Learning based Image Classification method that basically imparts images to a convolutional neural network to sort the images of food materials.By using this we prevent the damaged food products reach the consumer by segregating it in the starting stage itself.
+ 
 
-## Requirements
 
-* [docker](https://www.docker.com/products/docker-toolbox)
+PRE-REQUISITES:(We are using WINDOWS 10 OS)
+1.Docker toolbox
+2.Python package
+3.Tensorflow (based on OS)and high performance CPU/GPU is preferred.
 
-## Usage 
+INSTRUCTIONS:
+1.Install the latest version of Python using PIP or using     Anaconda.
 
-1. Start the docker image `docker run -it -v ~/projects/dump/tf_files/:/tf_files/ gcr.io/tensorflow/tensorflow:latest-devel`
+2.Install docker and download the tensorflow image using the following command
 
-2. Run the label_image script to label the image. `python /tf_files/label_image.py <path_to_file>`
+docker run -it gcr.io/tensorflow/tensorflow:latest-devel
+ 
+3.Create a folder in suitable file directory for image classification using 
+			mkdir/tf_files/fruits
 
-## Results
+and upload images in the file directory that need to be trained.
 
-### Accuracy
-![accuracy](screenshots/accuracy.png)
-###Test Elliptical Galaxy Image
-![accuracy](screenshots/test_el.png)
-###Test Spiral Galaxy Image
-![accuracy](screenshots/test_sp.png)
+4.Now link the file directory containing images to the docker container using the following commands
+
+docker run -it -v $HOME:/tf_files/fruits:/tf_files/fruits/ gcr.io/tensorflow/tensorflow:latest-devel
+
+				cd /tensorflow
+
+				git pull
+
+
+5.Train the model using the following commands...
+
+python tensorflow/examples/image_retraining/retrain.py \
+# Converts the image data into text data 
+> --bottleneck_dir=/tf_files/bottlenecks \
+
+# Iteration required for training accurate model
+> --how_many_training_steps 500 \
+
+# Implement Tranfer learning method using Inception model
+> --model_dir=/tf_files/inception \
+
+> --output_graph=/tf_files/retrainedgraph.pb \
+> --output_labels=/tf_files/retrainedlabels.txt \
+
+# Link the image directory
+> --image_dir /tf_files/fruits/SAMSA
+
+(Note: This may take upto 90 minutes based on the machine's performance)
+
+6.Created a python file Label_image.py to identify the sample images from the previously trained model.
+
+
+
+
